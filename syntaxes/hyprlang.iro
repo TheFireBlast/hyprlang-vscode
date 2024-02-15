@@ -1,0 +1,136 @@
+# hyprlang
+
+name						 = hyprlang
+file_extensions []			 = hyprlang;
+
+########################### Constants ##########################
+
+__IDENT				\= [A-Za-z_][A-Za-z_0-9\.\-\+]*
+
+######################### Parse contexts #######################
+
+contexts [] {
+
+# Entry point
+main : context {
+	
+	: pattern {
+		regex				\= (\$$${__IDENT})
+		styles []			 = .variable;
+	}
+	: pattern {
+		regex				\= (^\s*$${__IDENT})(\s*=)
+		styles []			 = .keyword, .punctuation;
+	}
+	: pattern {
+		regex				\= (^\s*$${__IDENT})(\s*\{)
+		styles []			 = .group, .punctuation;
+	}
+	: pattern {
+		regex				\= (rgba)(\(\s*)([A-Fa-f0-9]+)
+		styles []			 = .function, .punctuation, .numeric;
+	}
+	: pattern {
+		regex				\= (rgba)(\()
+		styles []			 = .function, .punctuation;
+	}
+	: inline_push {
+		regex				\= ((?:class|title):)
+		styles []			 = .keyword;
+		: pop {
+			regex			\= (\)\$?)
+			styles []		 = .regexp;
+		}
+         : pattern {
+            regex    \= ([^\\\)]+|\\\)?)
+            styles [] = .regexp;
+         }
+	}
+	: pattern {
+		regex				\= \b(true|false|yes|no|on|off)\b
+		styles []			 = .bool;
+	}
+	
+	
+	: pattern {
+		regex				\= ($${__IDENT})
+		styles []			 = .identifier;
+	}
+	: pattern {
+		regex				\= ([+-]?\b(?:0x[A-Fa-f0-9]*|\d+(?:\.\d*)?|\.\d+)(?:%|deg)?)
+		styles []			 = .numeric;
+	}
+	
+	: inline_push {
+		regex				\= (\")
+		styles []			 = .string.quoted.double;
+		: pop {
+			regex			\= (\")
+			styles []		 = .string.quoted.double;
+		}
+		: pattern {
+            regex    \= ((?:\\u[0-9a-f]{4})|(?:\\["\\/bfnrt]))
+            styles [] = .escape_char;
+         }
+         : pattern {
+            regex    \= ([^\"\\]+)
+            styles [] = .string.quoted.double;
+         }
+	}
+	
+	: pattern {
+		regex				\= (#.*)
+		styles []			 = .comment;
+	}
+	
+	: pattern {
+		regex				\= ([;{},.()\[\]=+-@!?:;|\\/*&%´`~^<>])
+		styles []			 = .punctuation;
+	}
+}
+
+}
+
+
+############################ Styles ############################
+
+styles [] {
+
+.comment : style {
+	textmate_scope			 = comment.line.number-sign
+}
+.keyword : style {
+	textmate_scope			 = keyword
+}
+.numeric : style {
+	textmate_scope 			 = constant.numeric
+}
+.bool : style {
+	textmate_scope 			 = constant.language.boolean
+}
+.punctuation : style {
+	textmate_scope			 = punctuation
+}
+.string.quoted.double : style {
+	textmate_scope 			 = string.quoted.double
+}
+.variable : style {
+	textmate_scope 			 = variable.other
+}
+.group : style {
+	textmate_scope 			 = entity.name.section
+}
+.function : style {
+	textmate_scope 			 = entity.name.function
+}
+.regexp : style {
+	textmate_scope 			 = string.regexp
+}
+.escape_char : style {
+	  textmate_scope   = constant.character.escape
+}
+.identifier : style {
+	  textmate_scope   = none
+}
+
+}
