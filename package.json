@@ -2,6 +2,7 @@
   "name": "hyprlang-vscode",
   "displayName": "Hyprlang",
   "description": "Hyprlang syntax highlighting",
+  "icon": "hyprland.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.86.0"
@@ -16,7 +17,11 @@
       {
         "id": "hyprlang",
         "filenamePatterns": ["**/.config/hypr/**/*.conf"],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "dark": "hyprland.png",
+          "light": "hyprland.png"
+        }
       }
     ],
     "grammars": [
