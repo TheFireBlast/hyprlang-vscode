@@ -4,6 +4,11 @@
   "description": "Hyprlang syntax highlighting",
   "icon": "hyprland.png",
   "version": "0.0.1",
+  "license": "MIT",
+  "publisher": "fireblast",
+  "repository": {
+    "url": "https://github.com/TheFireBlast/hyprlang-vscode"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
