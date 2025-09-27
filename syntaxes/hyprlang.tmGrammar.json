@@ -1,4 +1,5 @@
 {
+    "$schema": "https://www.schemastore.org/tmlanguage.json",
     "name": "hyprlang",
     "scopeName": "source.hyprlang",
     "patterns": [
