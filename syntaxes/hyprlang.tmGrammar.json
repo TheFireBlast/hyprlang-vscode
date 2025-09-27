@@ -61,7 +61,7 @@
                     }
                 },
                 {
-                    "begin": "((?:class|title):)",
+                    "begin": "((?:class|title|initialClass|initialTitle):)",
                     "beginCaptures": {
                         "1": {
                             "name": "keyword.hyprlang"
