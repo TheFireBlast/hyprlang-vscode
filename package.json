@@ -3,7 +3,7 @@
   "displayName": "Hyprlang",
   "description": "Hyprlang syntax highlighting",
   "icon": "hyprland.png",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "fireblast",
   "repository": {
