@@ -1,4 +1,5 @@
 {
+    "$schema": "https://www.schemastore.org/tmlanguage.json",
     "name": "hyprlang",
     "scopeName": "source.hyprlang",
     "patterns": [
@@ -61,27 +62,32 @@
                     }
                 },
                 {
-                    "begin": "((?:class|title):)",
+                    "begin": "((?:class|title|initialClass|initialTitle)):",
                     "beginCaptures": {
                         "1": {
                             "name": "keyword.hyprlang"
-                        },
-                        "2": {
-                            "name": "keyword.hyprlang"
                         }
                     },
-                    "end": "(\\)\\$?)",
+                    "end": "([^,]*)",
                     "endCaptures": {
                         "1": {
-                            "name": "string.regexp.hyprlang"
+                            "patterns": [
+                                {
+                                    "name": "string.regexp.hyprlang",
+                                    "match": "[^#]|(##)",
+                                    "captures": {
+                                        "1": {
+                                            "name": "constant.character.escape.hyprlang"
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "comment.line.number-sign.hyprlang",
+                                    "match": ".*(#.*)"
+                                }
+                            ]
                         }
-                    },
-                    "patterns": [
-                        {
-                            "name": "string.regexp.hyprlang",
-                            "match": "([^\\\\\\)]+|\\\\\\)?)"
-                        }
-                    ]
+                    }
                 },
                 {
                     "name": "constant.language.boolean.hyprlang",
