@@ -1,9 +1,9 @@
 {
   "name": "hyprlang-vscode",
   "displayName": "Hyprlang",
-  "description": "Hyprlang syntax highlighting",
+  "description": "Hyprland configuration syntax highlighting",
   "icon": "hyprland.png",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "publisher": "fireblast",
   "repository": {
@@ -36,6 +36,11 @@
         "path": "./syntaxes/hyprlang.tmGrammar.json"
       }
     ]
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
